@@ -17,6 +17,7 @@ int p_handler(va_list ap);
 int cap_unsigned_hex_handler(va_list ap);
 int string_handler(va_list ap);
 int handle_format(char f, va_list args);
+int last_char_handler(char m, va_list args);
 
 /**
 *struct format_handler - function

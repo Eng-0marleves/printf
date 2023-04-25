@@ -30,6 +30,24 @@ int handle_format(char f, va_list args)
 	return (0);
 }
 /**
+ * last_char_handler - function
+ * @m: parameter to passed
+ * @args: list
+ * Return: length
+ */
+int last_char_handler(char m, va_list args)
+{
+	int length = 0;
+
+	if (m == '%')
+		length += printf("%%");
+	else if (m == 'r')
+		length += printf("%%r");
+	else
+		length += handle_format(m, args);
+	return (length);
+}
+/**
  *_printf - function to print the passed conversion specifier
  *@format: format to be passed
  *Return: i which indicated the number of chars
@@ -46,12 +64,7 @@ int _printf(const char *format, ...)
 	{
 		if (lastChar == '%')
 		{
-			if (format[i] == '%')
-				length += printf("%%");
-			else if (format[i] == 'r')
-				length += printf("%%r");
-			else
-				length += handle_format(format[i], args);
+			length += last_char_handler(format[i], args);
 			lastChar = '\0';
 		}
 		else if (format[i] != '%')
